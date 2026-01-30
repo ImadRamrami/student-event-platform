@@ -1,7 +1,7 @@
 package com.miage.event_platform.controller;
 
 import com.miage.event_platform.model.Event;
-import com.miage.event_platform.repository.EventRepository;
+import com.miage.event_platform.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EventController {
 
     @Autowired
-    private EventRepository eventRepository;
+    private EventService eventService;
 
-    @GetMapping("/event/new")
+    @GetMapping("/events/new")
     public String showEventForm(Model model) {
         model.addAttribute("event", new Event());
         return "event_form";
     }
 
-    @PostMapping("/event/save")
+    @PostMapping("/events")
     public String saveEvent(@ModelAttribute Event event) {
-        eventRepository.save(event);
+        eventService.createEvent(event);
         return "redirect:/";
     }
 }
