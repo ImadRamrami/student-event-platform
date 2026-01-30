@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Data 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Event {
@@ -19,4 +19,5 @@ public class Event {
     private String description;
     private LocalDateTime date;
     private String location;
+    private Integer numberOfPlaces;
 }
