@@ -15,6 +15,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("events", eventRepository.findAll());
-        return "home";
+        return "index";
     }
 }
