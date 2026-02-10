@@ -26,4 +26,11 @@ public class EventController {
         eventService.createEvent(event);
         return "redirect:/";
     }
+
+    @GetMapping("/events/{id}")
+    public String getEvent(@org.springframework.web.bind.annotation.PathVariable Long id, Model model) {
+        Event event = eventService.getEventById(id);
+        model.addAttribute("event", event);
+        return "event_details";
+    }
 }
