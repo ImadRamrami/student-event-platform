@@ -3,33 +3,271 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Créer un événement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event | Student Event Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --accent-color: #6366f1;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0f172a;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background */
+        .ambient-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: #4f46e5;
+            top: -200px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #a855f7;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 40px);
+            }
+        }
+
+        /* Form Container */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 3.5rem;
+            opacity: 0;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--primary-gradient);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-label {
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-control:focus {
+            background: white;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .input-group-text {
+            background: rgba(241, 245, 249, 0.8);
+            border: 2px solid #cbd5e1;
+            border-right: none;
+            color: #64748b;
+        }
+
+        .btn-submit {
+            background: #1e1b4b;
+            border: none;
+            color: white;
+            padding: 1rem;
+            border-radius: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+            background: #312e81;
+        }
+
+        .btn-back {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-back:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .section-title {
+            background: -webkit-linear-gradient(45deg, #1e1b4b, #4f46e5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h2>Créer un nouvel événement</h2>
-        <form action="#" th:action="@{/events}" th:object="${event}" method="post">
-            <div class="mb-3">
-                <label for="title" class="form-label">Titre</label>
-                <input type="text" class="form-control" id="title" th:field="*{title}" required>
-            </div>
-            <div class="mb-3">
-                <label for="date" class="form-label">Date</label>
-                <input type="datetime-local" class="form-control" id="date" th:field="*{date}" required>
-            </div>
-            <div class="mb-3">
-                <label for="location" class="form-label">Lieu</label>
-                <input type="text" class="form-control" id="location" th:field="*{location}" required>
-            </div>
-            <div class="mb-3">
-                <label for="numberOfPlaces" class="form-label">Nombre de places</label>
-                <input type="number" class="form-control" id="numberOfPlaces" th:field="*{numberOfPlaces}" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </form>
+    <!-- Ambient Background -->
+    <div class="ambient-light">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <a th:href="@{/}" class="btn-back">
+                    <i class="bi bi-arrow-left me-2"></i> Dashboard
+                </a>
+
+                <div class="glass-card">
+                    <div class="text-center mb-5">
+                        <div class="mb-3">
+                            <span
+                                style="background: rgba(99, 102, 241, 0.1); color: #6366f1; padding: 10px; border-radius: 50%;">
+                                <i class="bi bi-stars fs-4"></i>
+                            </span>
+                        </div>
+                        <h2 class="section-title mb-2">Create Experience</h2>
+                        <p class="text-muted small fw-semibold">Launch your event to the campus</p>
+                    </div>
+
+                    <form action="#" th:action="@{/events}" th:object="${event}" method="post">
+                        <div class="mb-4">
+                            <label for="title" class="form-label">Event Title</label>
+                            <input type="text" class="form-control" id="title" th:field="*{title}"
+                                placeholder="e.g. End of Semester Party" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label">About Event</label>
+                            <textarea class="form-control" id="description" th:field="*{description}" rows="3"
+                                placeholder="Tell us what this event is about..." required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="date" class="form-label">Date & Time</label>
+                            <input type="datetime-local" class="form-control" id="date" th:field="*{date}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label">Location</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="border-radius: 12px 0 0 12px;">
+                                    <i class="bi bi-geo-alt text-muted"></i>
+                                </span>
+                                <input type="text" class="form-control border-start-0 ps-0"
+                                    style="border-radius: 0 12px 12px 0; border-left: none;" id="location"
+                                    th:field="*{location}" placeholder="e.g. Building A, Room 101" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="numberOfPlaces" class="form-label">Available Places</label>
+                            <input type="number" class="form-control" id="numberOfPlaces" th:field="*{numberOfPlaces}"
+                                placeholder="0" min="1" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit">
+                            Publish Event <i class="bi bi-rocket-takeoff ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
