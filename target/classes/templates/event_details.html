@@ -355,8 +355,11 @@
                             <div>
                                 <div class="detail-label">Availability</div>
                                 <div class="detail-value">
-                                    <span class="fs-4 fw-bold text-primary" th:text="${event.numberOfPlaces}">50</span>
+                                    <span class="fs-4 fw-bold text-primary"
+                                        th:text="${event.capacity - event.attendees.size()}">50</span>
                                     <span class="text-muted ms-1">spots remaining</span>
+                                    <small class="d-block text-muted"
+                                        th:text="'(' + ${event.attendees.size()} + '/' + ${event.capacity} + ' joined)'"></small>
                                 </div>
                             </div>
                         </div>
@@ -377,15 +380,32 @@
                             <strong class="fs-5">Student Committee</strong>
                         </div>
                     </div>
-                    <form th:action="@{/events/{id}/register(id=${event.id})}" method="post" id="registerForm">
-                        <button type="submit" class="btn btn-register" th:disabled="${event.numberOfPlaces == 0}"
-                            id="registerBtn">
-                            <span class="btn-text" th:if="${event.numberOfPlaces > 0}">Register Now</span>
-                            <span class="btn-text" th:if="${event.numberOfPlaces == 0}">Full</span>
+                    <!-- Authenticated: Unregister Form -->
+                    <form th:if="${currentUser != null and isRegistered}"
+                        th:action="@{/events/{id}/unregister(id=${event.id})}" method="post">
+                        <button type="submit" class="btn btn-register" style="background: #ef4444;">
+                            <span class="btn-text">Unregister</span>
+                        </button>
+                    </form>
+
+                    <!-- Authenticated: Register Form -->
+                    <form th:if="${currentUser != null and !isRegistered}"
+                        th:action="@{/events/{id}/register(id=${event.id})}" method="post" id="registerForm">
+                        <button type="submit" class="btn btn-register"
+                            th:disabled="${event.capacity - event.attendees.size() == 0}" id="registerBtn">
+                            <span class="btn-text" th:if="${event.capacity - event.attendees.size() > 0}">Register
+                                Now</span>
+                            <span class="btn-text" th:if="${event.capacity - event.attendees.size() == 0}">Full</span>
                             <span class="spinner-border spinner-border-sm d-none" role="status"
                                 aria-hidden="true"></span>
                         </button>
                     </form>
+
+                    <!-- Unauthenticated: Show Login Link -->
+                    <a th:if="${currentUser == null}" th:href="@{/login}" class="btn btn-register"
+                        style="text-decoration: none; display: inline-block;">
+                        Login to Register
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -362,12 +362,40 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <!-- Anonymous User -->
+                    <li class="nav-item" th:if="${currentUser == null}">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item" th:if="${currentUser == null}">
+                        <a class="nav-link" th:href="@{/register}">
+                            <button class="btn btn-create">Register</button>
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${currentUser == null}">
+                        <a class="nav-link" th:href="@{/events/new}">
+                            <button class="btn btn-create"
+                                style="background: rgba(99, 102, 241, 0.2); border-color: #6366f1;">
+                                <i class="bi bi-plus-lg me-1"></i> Create Event
+                            </button>
+                        </a>
+                    </li>
+
+                    <!-- Authenticated User -->
+                    <li class="nav-item" th:if="${currentUser != null}">
+                        <span class="nav-link text-white">Hello, <span
+                                th:text="${currentUser.username}">User</span>!</span>
+                    </li>
+                    <li class="nav-item" th:if="${currentUser != null}">
                         <a class="nav-link" th:href="@{/events/new}">
                             <button class="btn btn-create">
                                 <i class="bi bi-plus-lg me-1"></i> Create Event
                             </button>
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${currentUser != null}">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="bi bi-box-arrow-right"></i>
                         </a>
                     </li>
                 </ul>
@@ -394,6 +422,85 @@
             </div>
         </div>
 
+        <!-- My Created Events -->
+        <div th:if="${not #lists.isEmpty(myEvents)}" class="mb-5">
+            <h2 class="fw-bold text-white mb-4"><i class="bi bi-rocket-takeoff me-2 text-warning"></i>My Created Events
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col" th:each="event : ${myEvents}">
+                    <div class="event-card-wrapper">
+                        <div class="card event-card h-100 border-0 js-tilt" data-tilt>
+                            <div class="card-body d-flex flex-column">
+                                <div class="info-pill-container">
+                                    <span class="info-pill">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <span th:text="${event.location}">Location</span>
+                                    </span>
+                                    <span class="info-pill"
+                                        style="background: rgba(16, 185, 129, 0.1); color: #059669; border-color: rgba(16, 185, 129, 0.1);">
+                                        <i class="bi bi-people-fill"></i>
+                                        <span th:text="${event.attendees.size() + '/' + event.capacity}">0/0</span>
+                                    </span>
+                                </div>
+                                <h5 class="card-title" th:text="${event.title}">Event Title</h5>
+                                <h6 class="card-subtitle">
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    <span th:text="${#temporals.format(event.date, 'dd MMM yyyy • HH:mm')}">Date</span>
+                                </h6>
+                                <p class="card-text text-truncate flex-grow-1" th:text="${event.description}">
+                                    Description...
+                                </p>
+                                <a th:href="@{/events/{id}(id=${event.id})}" class="btn btn-details w-100 mt-4">
+                                    View Details <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5 opacity-10" style="border-top: 1px solid rgba(255,255,255,0.2);">
+        </div>
+
+        <!-- My Registered Events -->
+        <div th:if="${not #lists.isEmpty(attendedEvents)}" class="mb-5">
+            <h2 class="fw-bold text-white mb-4"><i class="bi bi-ticket-perforated me-2 text-info"></i>My Registered
+                Events</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col" th:each="event : ${attendedEvents}">
+                    <div class="event-card-wrapper">
+                        <div class="card event-card h-100 border-0 js-tilt" data-tilt>
+                            <div class="card-body d-flex flex-column">
+                                <div class="info-pill-container">
+                                    <span class="info-pill">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <span th:text="${event.location}">Location</span>
+                                    </span>
+                                    <span class="info-pill"
+                                        style="background: rgba(16, 185, 129, 0.1); color: #059669; border-color: rgba(16, 185, 129, 0.1);">
+                                        <i class="bi bi-people-fill"></i>
+                                        <span th:text="${event.attendees.size() + '/' + event.capacity}">0/0</span>
+                                    </span>
+                                </div>
+                                <h5 class="card-title" th:text="${event.title}">Event Title</h5>
+                                <h6 class="card-subtitle">
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    <span th:text="${#temporals.format(event.date, 'dd MMM yyyy • HH:mm')}">Date</span>
+                                </h6>
+                                <p class="card-text text-truncate flex-grow-1" th:text="${event.description}">
+                                    Description...
+                                </p>
+                                <a th:href="@{/events/{id}(id=${event.id})}" class="btn btn-details w-100 mt-4">
+                                    View Details <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5 opacity-10" style="border-top: 1px solid rgba(255,255,255,0.2);">
+        </div>
+
+        <h2 class="fw-bold text-white mb-4"><i class="bi bi-grid me-2 text-primary"></i>All Upcoming Events</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="eventsGrid">
             <!-- Event Card -->
             <div class="col" th:each="event : ${events}">
@@ -408,7 +515,7 @@
                                 <span class="info-pill"
                                     style="background: rgba(16, 185, 129, 0.1); color: #059669; border-color: rgba(16, 185, 129, 0.1);">
                                     <i class="bi bi-people-fill"></i>
-                                    <span th:text="${event.numberOfPlaces}">0</span>
+                                    <span th:text="${event.attendees.size() + '/' + event.capacity}">0/0</span>
                                 </span>
                             </div>
 
