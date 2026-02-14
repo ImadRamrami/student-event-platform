@@ -259,8 +259,10 @@
                                 placeholder="0" min="1" required>
                         </div>
 
-                        <button type="submit" class="btn btn-submit">
-                            Publish Event <i class="bi bi-rocket-takeoff ms-2"></i>
+                        <button type="submit" class="btn btn-submit" id="submitBtn">
+                            <span class="btn-text">Publish Event <i class="bi bi-rocket-takeoff ms-2"></i></span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status"
+                                aria-hidden="true"></span>
                         </button>
                     </form>
                 </div>
@@ -269,6 +271,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const btn = document.getElementById('submitBtn');
+            const spinner = btn.querySelector('.spinner-border');
+            const text = btn.querySelector('.btn-text');
+
+            // Only show loading if form is valid (HTML5 validation)
+            if (this.checkValidity()) {
+                spinner.classList.remove('d-none');
+                text.textContent = 'Publishing...';
+                btn.style.opacity = '0.7';
+                btn.style.pointerEvents = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -18,4 +18,14 @@ public class EventService {
     public Event getEventById(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
+
+    public boolean registerUser(Long eventId) {
+        Event event = getEventById(eventId);
+        if (event != null && event.getNumberOfPlaces() > 0) {
+            event.setNumberOfPlaces(event.getNumberOfPlaces() - 1);
+            eventRepository.save(event);
+            return true;
+        }
+        return false;
+    }
 }

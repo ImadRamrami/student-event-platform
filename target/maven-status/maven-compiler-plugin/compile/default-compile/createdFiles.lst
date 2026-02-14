@@ -1,0 +1,6 @@
+com\miage\event_platform\service\EventService.class
+com\miage\event_platform\EventPlatformApplication.class
+com\miage\event_platform\controller\HomeController.class
+com\miage\event_platform\model\Event.class
+com\miage\event_platform\repository\EventRepository.class
+com\miage\event_platform\controller\EventController.class

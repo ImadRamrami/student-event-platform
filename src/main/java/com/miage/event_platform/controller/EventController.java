@@ -33,4 +33,17 @@ public class EventController {
         model.addAttribute("event", event);
         return "event_details";
     }
+
+    @PostMapping("/events/{id}/register")
+    public String registerForEvent(@org.springframework.web.bind.annotation.PathVariable Long id,
+            org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        boolean success = eventService.registerUser(id);
+        if (success) {
+            redirectAttributes.addFlashAttribute("success", "Inscription validée ! Il reste une place de moins.");
+        } else {
+            redirectAttributes.addFlashAttribute("error",
+                    "Échec de l'inscription : Plus de places disponibles ou événement introuvable.");
+        }
+        return "redirect:/events/" + id;
+    }
 }
