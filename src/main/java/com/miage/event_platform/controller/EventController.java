@@ -57,7 +57,7 @@ public class EventController {
     public String registerForEvent(@org.springframework.web.bind.annotation.PathVariable Long id,
             java.security.Principal principal,
             org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
-        System.out.println("DEBUG: Entering registerForEvent for id: " + id);
+
         try {
             boolean success = eventService.registerUser(id, principal.getName());
             if (success) {
@@ -69,7 +69,7 @@ public class EventController {
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            System.out.println("DEBUG: Caught Throwable: " + e.getMessage());
+
             redirectAttributes.addFlashAttribute("error", "Error: " + e.getMessage());
         }
         return "redirect:/events/" + id;
