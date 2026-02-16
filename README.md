@@ -27,7 +27,7 @@ Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant
 
 ## 🛠️ Stack Technique
 
-- **Backend** : Java 17, Spring Boot 3+ (Spring MVC, Spring Data JPA, Spring Security).
+- **Backend** : Java 25, Spring Boot 3+ (Spring MVC, Spring Data JPA, Spring Security).
 - **Base de Données** : H2 (In-Memory) pour le développement rapide.
 - **Frontend** : Thymeleaf, Bootstrap 5, CSS3 (Variables & Animations), JavaScript (Vanilla + Librairies externes).
 - **Outils** : Maven, Docker (compatible), Git.
@@ -37,7 +37,7 @@ Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant
 ## ⚙️ Installation et Lancement
 
 ### Pré-requis
-- JDK 17 installé.
+- JDK 25 installé.
 - Maven (optionnel, le wrapper `mvnw` est fourni).
 
 ### Démarrage Rapide
