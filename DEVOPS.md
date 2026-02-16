@@ -89,3 +89,19 @@ Une fois lancée, l'application est accessible à l'adresse : `http://localhost:
 
 ---
 *Ce document témoigne de notre engagement envers l'excellence technique, garantissant un produit stable, maintenable et prêt pour la croissance.*
+
+---
+
+## 📝 Annexe : Générer un Token Docker Hub
+
+Pour obtenir le `DOCKERHUB_ACCESS_TOKEN`, suivez ces étapes précises :
+
+1.  Connectez-vous sur [hub.docker.com](https://hub.docker.com/).
+2.  Cliquez sur votre avatar (en haut à droite) > **Account Settings**.
+3.  Allez dans l'onglet **Security**.
+4.  Cliquez sur le bouton bleu **New Access Token**.
+5.  Remplissez le formulaire :
+    *   **Description** : `GitHub Actions CI`
+    *   **Access permissions** : `Read, Write, Delete`
+6.  Cliquez sur **Generate**.
+7.  **Copiez immédiatement le token** (il ne sera plus jamais affiché). C'est cette valeur qu'il faut coller dans GitHub Secrets.
