@@ -44,6 +44,19 @@ Pour répondre aux exigences modernes (et aux TDs avancés), nous avons intégr�
 
 ---
 
+## 🔐 Configuration des Secrets (CI/CD)
+
+Pour que le pipeline GitHub Actions puisse publier l'image sur Docker Hub, les variables suivantes doivent être définies dans **Settings > Secrets and variables > Actions** du dépôt GitHub :
+
+| Nom du Secret | Valeur à renseigner | Description |
+| :--- | :--- | :--- |
+| `DOCKERHUB_USERNAME` | Votre identifiant Docker Hub | Ex: `imadramrami` |
+| `DOCKERHUB_ACCESS_TOKEN` | Votre Token d'accès (PAT) | Généré sur [hub.docker.com](https://hub.docker.com/settings/security) |
+
+> **Note de Sécurité :** Nous n'utilisons jamais le mot de passe brut, mais un *Access Token* pour assurer une révocation facile en cas de compromission.
+
+---
+
 ## 💻 Guide de Démarrage Rapide
 
 Pour un investisseur ou un auditeur technique souhaitant tester l'application localement, nous avons simplifié le processus grâce à Docker.
