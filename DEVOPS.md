@@ -34,12 +34,23 @@ Notre workflow automatisé (`.github/workflows/ci.yml`) s'exécute à chaque mod
 
 ---
 
+### 3. Infrastructure as Code & Orchestration
+Pour répondre aux exigences modernes (et aux TDs avancés), nous avons intégré :
+*   **Java 25 (Preview)** : Utilisation des dernières fonctionnalités et de l'image Docker optimisée `amazoncorretto:25-alpine`.
+*   **Kubernetes (K8s)** : Manifestes de déploiement (`k8s/`) pour orchestrer les conteneurs (Pods, Services).
+*   **Terraform** : Configuration IaC (`terraform/`) pour provisionner l'infrastructure de manière déclarative.
+*   **Monitoring** : Endpoints Prometheus activés via Spring Boot Actuator.
+*   **Sécurité** : Scan de vulnérabilités **Trivy** intégré dans le pipeline CI.
+
+---
+
 ## 💻 Guide de Démarrage Rapide
 
 Pour un investisseur ou un auditeur technique souhaitant tester l'application localement, nous avons simplifié le processus grâce à Docker.
 
 ### Prérequis
-*   Docker Desktop installé et lancé.
+*   Docker Desktop installé.
+*   (Optionnel) Minikube / Kind pour K8s.
 
 ### Commandes
 
@@ -49,10 +60,16 @@ Pour un investisseur ou un auditeur technique souhaitant tester l'application lo
     docker build -t student-event-platform .
     ```
 
-2.  **Lancer l'application**
+2.  **Lancer avec Docker**
     Démarre l'application dans un conteneur isolé, accessible sur le port 8080.
     ```bash
     docker run -p 8080:8080 student-event-platform
+    ```
+
+3.  **Déployer sur K8s (Exemple)**
+    ```bash
+    kubectl apply -f k8s/deployment.yaml
+    kubectl apply -f k8s/service.yaml
     ```
 
 Une fois lancée, l'application est accessible à l'adresse : `http://localhost:8080`

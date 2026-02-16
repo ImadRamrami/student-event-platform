@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-event-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-event-platform
+  template:
+    metadata:
+      labels:
+        app: student-event-platform
+    spec:
+      containers:
+        - name: student-event-platform
+          image: student-event-platform:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
