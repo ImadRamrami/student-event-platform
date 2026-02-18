@@ -1,5 +1,5 @@
 # Build stage
-FROM amazoncorretto:25-alpine AS build
+FROM amazoncorretto:21-alpine AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
@@ -9,7 +9,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Run stage
-FROM amazoncorretto:25-alpine
+FROM amazoncorretto:21-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
