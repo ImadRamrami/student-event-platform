@@ -57,6 +57,18 @@ Pour que le pipeline GitHub Actions puisse publier l'image sur Docker Hub, les v
 
 ---
 
+---
+
+## 5. Qualité du Code (SonarCloud)
+Le projet est analysé automatiquement par **SonarCloud** pour garantir :
+*   Aucun bug critique (Fiabilité).
+*   Pas de vulnérabilités (Sécurité).
+*   Code propre et maintenable.
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ImadRamrami_student-event-platform&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ImadRamrami_student-event-platform)
+
+---
+
 ## 💻 Guide de Démarrage Rapide
 
 Pour un investisseur ou un auditeur technique souhaitant tester l'application localement, nous avons simplifié le processus grâce à Docker.

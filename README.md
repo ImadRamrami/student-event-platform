@@ -2,6 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://files.shields.io/badge/Java-21-orange)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen.svg)](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ImadRamrami_student-event-platform&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ImadRamrami_student-event-platform)
 [![Java CI with Maven](https://github.com/ImadRamrami/student-event-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ImadRamrami/student-event-platform/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-5%2F5%20passed-success.svg)](https://img.shields.io/badge/tests-5%2F5%20passed-success)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
