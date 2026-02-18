@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: student-event-platform-service
 spec:
-  type: NodePort
+  type: LoadBalancer # Expose to the internet (or NodePort for local)
   selector:
     app: student-event-platform
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
-      nodePort: 30080
