@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>FinOps Dashboard - Cost Monitoring</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .cost-indicator {
+            font-size: 0.9rem;
+        }
+
+        .text-expensive {
+            color: #dc3545;
+        }
+
+        .text-optimized {
+            color: #198754;
+        }
+    </style>
+</head>
+
+<body class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-5">💸 FinOps Dashboard</h1>
+            <p class="text-muted">Real-time resource cost monitoring</p>
+        </div>
+        <a href="/" class="btn btn-outline-primary">Back to App</a>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <!-- RAM Cost Card -->
+        <div class="col-md-6">
+            <div class="card h-100 p-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-muted text-uppercase small">Memory Usage (RAM)</h5>
+                    <div id="ramValue" class="metric-value">Loading...</div>
+                    <div class="cost-indicator mt-2">
+                        Estimated Cost: <span id="ramCost">--</span> / hour
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CPU Cost Card -->
+        <div class="col-md-6">
+            <div class="card h-100 p-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-muted text-uppercase small">CPU Load</h5>
+                    <div id="cpuValue" class="metric-value">Loading...</div>
+                    <div class="cost-indicator mt-2">
+                        Scaling status: <span id="scalingStatus">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="card p-3">
+        <canvas id="costChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('costChart').getContext('2d');
+        const costChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'RAM Usage (MB)',
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    data: [],
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { display: false },
+                    y: { beginAtZero: true, title: { display: true, text: 'Megabytes (MB)' } }
+                }
+            }
+        });
+
+        function fetchMetrics() {
+            // Fetch RAM
+            fetch('/actuator/metrics/jvm.memory.used')
+                .then(response => response.json())
+                .then(data => {
+                    const bytes = data.measurements[0].value;
+                    const mb = (bytes / 1024 / 1024).toFixed(2);
+
+                    document.getElementById('ramValue').innerText = mb + ' MB';
+
+                    // Specific "FinOps" logic: assume $0.005 per 100MB/hour
+                    const cost = (mb / 100 * 0.005).toFixed(4);
+                    document.getElementById('ramCost').innerText = '$' + cost;
+
+                    // Update Chart
+                    const now = new Date().toLocaleTimeString();
+                    if (costChart.data.labels.length > 20) {
+                        costChart.data.labels.shift();
+                        costChart.data.datasets[0].data.shift();
+                    }
+                    costChart.data.labels.push(now);
+                    costChart.data.datasets[0].data.push(mb);
+                    costChart.update();
+                });
+
+            // Fetch CPU
+            fetch('/actuator/metrics/process.cpu.usage')
+                .then(response => response.json())
+                .then(data => {
+                    const load = (data.measurements[0].value * 100).toFixed(1);
+                    document.getElementById('cpuValue').innerText = load + '%';
+
+                    const statusEl = document.getElementById('scalingStatus');
+                    if (load > 80) {
+                        statusEl.innerHTML = '<span class="text-expensive">⚠️ High Load (Auto-scale needed)</span>';
+                    } else if (load < 10) {
+                        statusEl.innerHTML = '<span class="text-optimized">✅ Optimized (Low cost)</span>';
+                    } else {
+                        statusEl.innerText = 'Normal operation';
+                    }
+                });
+        }
+
+        setInterval(fetchMetrics, 2000); // Update every 2 seconds
+        fetchMetrics(); // Initial call
+    </script>
+</body>
+
+</html>

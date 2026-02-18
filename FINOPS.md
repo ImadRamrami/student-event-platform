@@ -4,7 +4,17 @@ Dans une approche **FinOps**, chaque ressource consommée a un coût. Pour optim
 
 Nous utilisons **Spring Boot Actuator** pour exposer ces métriques vitales.
 
-## 📊 Accéder aux Métriques
+## 📈 Dashboard FinOps (Nouveau !)
+
+Pour une visualisation en temps réel et "Manager-friendly" :
+👉 **[http://localhost:8080/finops](http://localhost:8080/finops)**
+
+Ce tableau de bord affiche :
+*   Le coût estimé de la RAM par heure.
+*   Un graphique d'évolution en temps réel.
+*   Des alertes automatiques si le CPU est sous/sur-utilisé.
+
+## 📊 Accéder aux Métriques Brutes
 
 Les endpoints de monitoring sont accessibles publiquement pour faciliter le scraping par des outils comme Prometheus.
 
