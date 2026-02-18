@@ -31,6 +31,9 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/", true)
                         .permitAll())
                 .logout((logout) -> logout.permitAll())
+                // CSRF is disabled for simplicity in this student project/MVP.
+                // In a production environment, this should be enabled and the frontend should
+                // handle CSRF tokens.
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 

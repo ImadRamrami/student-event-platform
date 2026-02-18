@@ -67,10 +67,8 @@ public class EventController {
                         "Échec de l'inscription : Vous êtes déjà inscrit ou l'événement est complet.");
 
             }
-        } catch (Throwable e) {
-            e.printStackTrace();
-
-            redirectAttributes.addFlashAttribute("error", "Error: " + e.getMessage());
+        } catch (Exception e) {
+            handleException(e, redirectAttributes, "Error registering for event");
         }
         return "redirect:/events/" + id;
     }
@@ -83,9 +81,15 @@ public class EventController {
             eventService.unregisterUser(id, principal.getName());
             redirectAttributes.addFlashAttribute("success", "Désinscription validée !");
         } catch (Exception e) {
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("error", "Error: " + e.getMessage());
+            handleException(e, redirectAttributes, "Error unregistering from event");
         }
         return "redirect:/events/" + id;
+    }
+
+    private void handleException(Exception e,
+            org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes, String logMessage) {
+        org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(EventController.class);
+        logger.error(logMessage, e);
+        redirectAttributes.addFlashAttribute("error", "Error: " + e.getMessage());
     }
 }
