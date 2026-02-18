@@ -23,7 +23,7 @@ public class SecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/events").authenticated()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/events/*/register").authenticated()
                         .requestMatchers("/", "/events/**", "/register", "/login", "/css/**", "/js/**", "/images/**",
-                                "/error")
+                                "/error", "/actuator/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
