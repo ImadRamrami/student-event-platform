@@ -1,5 +1,11 @@
 # 🎓 Student Event Platform
 
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://files.shields.io/badge/Java-21-orange)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen.svg)](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://img.shields.io/badge/build-passing-brightgreen)
+[![Tests](https://img.shields.io/badge/tests-5%2F5%20passed-success.svg)](https://img.shields.io/badge/tests-5%2F5%20passed-success)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Bienvenue sur la **Student Event Platform**, une solution moderne pour gérer et rejoindre des événements sur le campus.
 Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant en œuvre une approche **DevOps** et une architecture **M-V-C** robuste avec Spring Boot.
 

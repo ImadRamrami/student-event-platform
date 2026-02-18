@@ -44,9 +44,8 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(CustomUserDetailsService userDetailsService) {
-        // Use constructor injection as per compilation error requirement
-        // Passing userDetailsService to constructor and NOT using setUserDetailsService
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
