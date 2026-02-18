@@ -34,6 +34,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin # Default password
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./monitoring/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./monitoring/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
     networks:
       - monitoring-net
 
