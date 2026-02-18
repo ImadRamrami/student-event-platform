@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 5s # Scrape frequently for demo purposes
+
+scrape_configs:
+  - job_name: 'student-event-platform'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['app:8080'] # 'app' is the service name in docker-compose
