@@ -2,7 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://files.shields.io/badge/Java-21-orange)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen.svg)](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://img.shields.io/badge/build-passing-brightgreen)
+[![Java CI with Maven](https://github.com/ImadRamrami/student-event-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ImadRamrami/student-event-platform/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-5%2F5%20passed-success.svg)](https://img.shields.io/badge/tests-5%2F5%20passed-success)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -33,7 +33,7 @@ Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant
 
 ## 🛠️ Stack Technique
 
-- **Backend** : Java 25, Spring Boot 3+ (Spring MVC, Spring Data JPA, Spring Security).
+- **Backend** : Java 21, Spring Boot 3+ (Spring MVC, Spring Data JPA, Spring Security).
 - **Base de Données** : H2 (In-Memory) pour le développement rapide.
 - **Frontend** : Thymeleaf, Bootstrap 5, CSS3 (Variables & Animations), JavaScript (Vanilla + Librairies externes).
 - **Outils** : Maven, Docker (compatible), Git.
@@ -43,7 +43,7 @@ Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant
 ## ⚙️ Installation et Lancement
 
 ### Pré-requis
-- JDK 25 installé.
+- JDK 21 installé.
 - Maven (optionnel, le wrapper `mvnw` est fourni).
 
 ### Démarrage Rapide

@@ -36,7 +36,7 @@ Notre workflow automatisé (`.github/workflows/ci.yml`) s'exécute à chaque mod
 
 ### 3. Infrastructure as Code & Orchestration
 Pour répondre aux exigences modernes (et aux TDs avancés), nous avons intégré :
-*   **Java 25 (Preview)** : Utilisation des dernières fonctionnalités et de l'image Docker optimisée `amazoncorretto:25-alpine`.
+*   **Java 21** : Utilisation des dernières fonctionnalités LTS et de l'image Docker optimisée `eclipse-temurin:21-jre`.
 *   **Kubernetes (K8s)** : Manifestes de déploiement (`k8s/`) pour orchestrer les conteneurs (Pods, Services).
 *   **Terraform** : Configuration IaC (`terraform/`) pour provisionner l'infrastructure de manière déclarative.
 *   **Monitoring** : Endpoints Prometheus activés via Spring Boot Actuator.
