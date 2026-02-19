@@ -65,6 +65,9 @@
                     <div class="cost-indicator mt-2">
                         Scaling status: <span id="scalingStatus">--</span>
                     </div>
+                    <div class="cost-indicator mt-2 text-success">
+                        🌱 Estimated CO2: <span id="co2Value">--</span> g
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,6 +133,10 @@
                 .then(data => {
                     const load = (data.measurements[0].value * 100).toFixed(1);
                     document.getElementById('cpuValue').innerText = load + '%';
+
+                    // CO2 Estimation (CPU * 0.5g)
+                    const co2 = (load * 0.5).toFixed(2);
+                    document.getElementById('co2Value').innerText = co2;
 
                     const statusEl = document.getElementById('scalingStatus');
                     if (load > 80) {
