@@ -70,6 +70,25 @@ Ce projet a été réalisé dans le cadre de notre cursus universitaire, mettant
 
 ---
 
+## 📊 Supervision (Monitoring)
+
+Pour visualiser les métriques de l'application (CPU, Mémoire, Requêtes HTTP), nous utilisons une stack **Prometheus + Grafana**.
+
+### Lancement de la Stack
+Assurez-vous que Docker est lancé, puis exécutez :
+```bash
+docker-compose up -d
+```
+
+### Accès aux Tableaux de Bord
+- **Grafana** : [http://localhost:3000](http://localhost:3000)
+  - *Login* : `admin`
+  - *Mot de passe* : `admin`
+  - *Tableaux de bord* : Disponibles dans la section "Dashboards" (JVM, CPU, etc.)
+- **Prometheus** : [http://localhost:9090](http://localhost:9090)
+
+---
+
 ## 📖 Guide d'Utilisation
 
 1. **Visiteur** : Vous pouvez voir la liste des événements.

@@ -23,7 +23,7 @@ Nous avons mis en place un pipeline d'Intégration Continue (CI) automatisé pou
 Notre workflow automatisé (`.github/workflows/ci.yml`) s'exécute à chaque modification sur les branches principales. Il suit un processus rigoureux en plusieurs étapes :
 
 1.  **Récupération du Code** : Checkout de la dernière version du code source.
-2.  **Configuration de l'Environnement** : Installation d'un environnement Java 17 propre (Eclipse Temurin).
+2.  **Configuration de l'Environnement** : Installation d'un environnement Java 21 propre (Eclipse Temurin).
 3.  **Build & Tests Automatisés** (`Maven Verify`) :
     *   Compilation du projet.
     *   Exécution de l'ensemble des tests unitaires et d'intégration.
